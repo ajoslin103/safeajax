@@ -1,0 +1,23 @@
+<html>
+<!-- allen @joslin .net -->
+<body>
+	<head>
+		<script type='text/javascript' src='http://code.jquery.com/jquery-latest.pack.js'></script>
+		<script type="text/javascript" src="http://dev.iceburg.net/jquery/jqModal/jqModal.js"></script>
+		<script type="text/javascript" src="http://www.json.org/json2.js"></script>
+		<script type='text/javascript' src='./jquery.safeAjax.js'></script>
+		<script type='text/javascript'>
+		$(document).ready(function(){
+			$('#pageProtector').safeAjax({ debug: true, login: false, ajaxConnector: './rConnector.php' });
+		});
+		</script>
+	</head>
+</head>
+<body>
+
+	this page will not be protected
+
+	<div id="pageProtector"></div>
+
+</body>
+</html>
