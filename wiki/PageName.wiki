@@ -5,15 +5,14 @@
 
 safeAjax
 
-I wrote this plugin to password protect web pages/sites 
-and also to safeguard my ajax communications and sql access.  
+I wrote this plugin to password protect web pages/sites and also to safeguard my ajax communications and sql access.  
 
 It's originally based upon chris shifletts article: the truth about sessions 
 
-This plugin requires a server-based connector which
-does the testing of the connection as well as the 
-password and access level validation prior to executing 
-any sql statements.
+This plugin requires a server-based connector which does the testing of the connection as well as the password and access level validation prior to executing any sql statements.
+
+This version 2 has been reorganized from version one and includes a new drop-in methodology for easily extending the server-side codebase
+
 
 
 = Details =
