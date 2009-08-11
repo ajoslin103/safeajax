@@ -1,9 +1,9 @@
 #labels ajoslin,ajax,security,jquery,plugin,php,password,session,cookie
-= Summary =
+=== Summary ===
 
 General information about the safeAjax plugin by Allen Joslin
 
-== Introduction ==
+=== Introduction ===
 
 I wrote this plugin to password protect web pages/sites and also to safeguard my ajax communications and sql access.
 
@@ -13,11 +13,21 @@ This plugin requires a server-based connector which does the testing of the conn
 
 This version 2 has been reorganized from version one and includes a new drop-in methodology for easily extending the server-side codebase
 
-== Usage == 
+=== Usage === 
+
+At this time there are several plugins that safeAjax depends upon, the next version will load them automatically -- for now you have to include them yourself 
+
+{{{
+	<script type='text/javascript'     src='http://code.jquery.com/jquery-latest.pack.js'></script>
+	<script type="text/javascript"     src="http://www.json.org/json2.js"></script>
+	<link type="text/css" media="all" href="http://dev.iceburg.net/jquery/jqModal/jqModal.css" rel="stylesheet" />
+	<script type="text/javascript"     src="http://dev.iceburg.net/jquery/jqModal/jqModal.js"></script>
+	<script type="text/javascript"     src="http://plugins.jquery.com/files/jquery.sha1.js.txt"></script>
+	<script type="text/javascript"     src="http://plugins.jquery.com/files/jquery.query-2.1.5.js.txt"></script>
+}}}
 
 
-
-== Details ==
+=== Details ===
 
 changelog, see allen @joslin .net for changes
 08/06/09 - version 2.3: finished dropin-class support, cleaned, packaged
