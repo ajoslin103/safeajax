@@ -3,9 +3,9 @@ General information about the safeAjax plugin by Allen Joslin
 
 === In Summary ===
 
-Ajax is a thing of beauty, combining Ajax and jQuery creates elegance -- elegance with a need for quality protection, protection that is offered via safeAjax.
+Ajax is a thing of beauty, combining Ajax and jQuery creates elegance -- and insideous elegance resulting in a need for truly seamless protection, protection that is offered via safeAjax.
 
-I wrote this plugin to password protect web pages/sites and also to safeguard my backend resources and actions. It's originally based upon Chris Shifletts article: the truth about sessions, and uses the cross-platform JSON notation for communications between the javascript and the server-side code.  
+I wrote this plugin to password protect my own web pages/sites and also to safeguard my backend resources and actions. It's originally based upon Chris Shifletts article: the truth about sessions, and uses the cross-platform JSON notation for communications between the javascript and the server-side code.  I now offer it up to you, Enjoy !!
 
 === Web-side Usage === 
 
@@ -61,7 +61,7 @@ $('#saveBtn').click(function(){
    dataItems.addr = $('#addr').val();    dataItems.city = $('#city').val();
    dataItems.state = $('#state').val();  dataItems.zip =$('#zip').val();
    $('#safeAjax').safeDBMS(dataItems,function(result){ 
-      $('#savedStatus').html('['+(result.safeAjax)?'saved ok':'save failed'+']');
+      $('#savedStatus').html('['+(result.sqlResult)?'saved ok':'save failed'+']');
    });
 });
 
@@ -89,7 +89,67 @@ This plugin was written to support a new drop-in methodology for easily extendin
 
 This support for drop-in classes allows one to easily group sets of routines related to particular actions or entities.  It's far easier to compartmentalize your code and limit the ripples of change and testing when you can segment your codebase in this way.  Even though all code is instatiated for each request and response whether it will be used or not I believe the tradeoff to code stability and maintainablity to be completely worth the cost of a few more milliseconds per request/response cycle.
 
+The current implementation looks for the drop-ins folder as a sibling to the folder where safeAjax was loaded from -- you can change this (carefully) to wherever you wish.  Note: there is a required naming convention for these files -- do not fail to name your files properly! * <className>.class.php * Only files matching this naming convention will be loaded and executed !!
 
+Here's a sample server side class file to handle the address load and save functions we referenced above:
+
+{{{
+<?
+
+require_once("../safeAjaxDBMS/safeAjax_DBMS.interface.php");
+
+// This is a sample usage of the interface for database access classes, this file would be named Addresses.class.php
+
+class Addresses implements safeAjax_DBMS {
+
+   function handleRequest ( &$params, &$json, &$dbmsConnector, &$reader, &$writer ) {
+   
+      // &$params -- this associative array contains all the _GET and _POST parameters 
+      // &$json -- this associative array is provided for your return values
+      // &$dbmsConnector -- this variable implements the security codebase and confirms username/passwords
+      // &$reader -- this variable holds the readOnly connection to the database
+      // &$writer -- this variable holds the readWite connection to the database
+
+      if ($reader != null) {
+         if ($params['load'] == 'address') { 
+            if ($dbmsConnector->testAccessLevel(0,$json,$reader)) { // still required, although level 0 needs no authentication
+               $address_id = mysql_real_escape_string($params['id'],$reader->conn($json)); 
+               $selectSQL = " select addr, city, state, zip from tbl_address_records where id = $tbl_address_records ";
+               if ($selectResult = $reader->db_select_json($selectSQL,$json)) {
+                  if ($thisRow = mysql_fetch_assoc($selectResult)) {
+                     foreach (array_keys($thisRow) as $colName) { 
+                        $json[$colName] = $thisRow[$colName];
+                     }
+                  }
+               }
+               
+            // retrieve the address record here
+            }
+         }
+      }
+
+      if ($writer != null) {
+         if ($params['save'] == 'address') { 
+            if ($dbmsConnector->testAccessLevel(5,$json,$reader)) { // required, anything above level 0 should require some authentication
+               $address_id = mysql_real_escape_string($params['id'],$reader->conn($json)); 
+               $addr = mysql_real_escape_string($params['name'],$writer->conn($json));
+               $city = mysql_real_escape_string($params['city'],$writer->conn($json));
+               $state = mysql_real_escape_string($params['state'],$writer->conn($json));
+               $zip = mysql_real_escape_string($params['zip'],$writer->conn($json));
+               $updateSQL = " update tbl_address_records set addr='$addr', city='$city', state='$state', zip='$zip' where id = $tbl_address_records";
+               if ($writer->db_update_json($updateSQL,$json)) {
+                  $json['sqlResult'] = true;
+               }
+            }
+         }
+      }
+
+   }
+
+}
+
+?>
+}}}
 
 === Changelog ===
 
