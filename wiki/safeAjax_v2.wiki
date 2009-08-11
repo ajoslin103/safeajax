@@ -20,13 +20,7 @@ At this time there are several plugins that safeAjax depends upon, the next vers
 <script type='text/javascript'     src='http://plugins.jquery.com/files/jquery.query-2.1.5.js.txt'></script>
 }}}
 
-Now add a safeAjax div anywhere in your document, note that safeAjax uses console logging for errors and progress info
-
-{{{
-	<div id='safeAjax'></div>
-}}}
-
-Then include safeAjax and identify the connector
+Include safeAjax and identify the connector when your page loads
 
 {{{
 <script type='text/javascript'      src='./lib/safeAjax/jquery.safeAjax_v2.js'></script>
@@ -37,11 +31,21 @@ $(document).ready(function() {
 </script>
 }}}
 
-Use the connector at will to request info and actions from the backend, should your backend decide a resource/action needs protection then safeAjax will enforce it automatically
+Note: you will have to add a safeAjax div somewhere in your document, nothing will work without it! (note that safeAjax uses console logging for errors and progress info.)
 
-The LightBox plugin will be used to present a login dialog which will not go away until the backend accepts the given username and password combination and cookies the user's browser (the cookie does not contain any info that can be used to authorize any other browser or session and has a configurable expiry date.)
+{{{
+<div id='safeAjax'></div>
+}}}
 
-Once the user succeeds then the request will be re-submitted and approved using the previously deposited cookie.  The request/response that causes the login to be required is discarded and automatically re-submitted by safeAjax to streamline the process of approving requests as well as improving the overall security.
+* Lights, Camera, Action ! *
+
+Use the connector at will to request info and actions from the backend, should your backend deem that a particular resource/action needs protection then safeAjax will enforce the protection automatically.  
+
+The jqModal plugin will be used to present a login dialog which will not go away until the backend accepts the given username and password combination, and cookies the user's browser (the cookie does not contain any info that can be used to authorize any other browser or session and has a configurable expiry date.)
+
+Once the user succeeds then the request will be re-submitted and approved using the previously deposited cookie.  The request/response that caused the login to be required is discarded and a copy is automatically re-submitted by safeAjax to streamline the process of approving requests as well as [slightly] improving the overall security.
+
+* jQuery samples * 
 
 {{{
 
