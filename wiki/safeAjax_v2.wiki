@@ -1,7 +1,9 @@
-#summary One-General information about the safeAjax plugin by Allen Joslin
 #labels ajoslin,ajax,security,jquery,plugin,php,password,session,cookie
+= Summary =
 
-= Introduction =
+General information about the safeAjax plugin by Allen Joslin
+
+== Introduction ==
 
 I wrote this plugin to password protect web pages/sites and also to safeguard my ajax communications and sql access.
 
@@ -15,7 +17,7 @@ This version 2 has been reorganized from version one and includes a new drop-in 
 
 
 
-= Details =
+== Details ==
 
 changelog, see allen @joslin .net for changes
 08/06/09 - version 2.3: finished dropin-class support, cleaned, packaged
