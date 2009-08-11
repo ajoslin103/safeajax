@@ -18,31 +18,56 @@ This version 2 has been reorganized from version one and includes a new drop-in 
 At this time there are several plugins that safeAjax depends upon, the next version will load them automatically -- for now you have to include them yourself 
 
 {{{
-	<script type='text/javascript'     src='http://code.jquery.com/jquery-latest.pack.js'></script>
-	<script type="text/javascript"     src="http://www.json.org/json2.js"></script>
-	<link type="text/css" media="all" href="http://dev.iceburg.net/jquery/jqModal/jqModal.css" rel="stylesheet" />
-	<script type="text/javascript"     src="http://dev.iceburg.net/jquery/jqModal/jqModal.js"></script>
-	<script type="text/javascript"     src="http://plugins.jquery.com/files/jquery.sha1.js.txt"></script>
-	<script type="text/javascript"     src="http://plugins.jquery.com/files/jquery.query-2.1.5.js.txt"></script>
+<script type='text/javascript'     src='http://code.jquery.com/jquery-latest.pack.js'></script>
+<script type='text/javascript'     src='http://www.json.org/json2.js'></script>
+<link type='text/css' media='all' href='http://dev.iceburg.net/jquery/jqModal/jqModal.css' rel='stylesheet' />
+<script type='text/javascript'     src='http://dev.iceburg.net/jquery/jqModal/jqModal.js'></script>
+<script type='text/javascript'     src='http://plugins.jquery.com/files/jquery.sha1.js.txt'></script>
+<script type='text/javascript'     src='http://plugins.jquery.com/files/jquery.query-2.1.5.js.txt'></script>
 }}}
 
 Now add a safeAjax div anywhere in your document, note that safeAjax uses console logging for errors and progress info
 
 {{{
-	<div id="safeAjax"></div>
+	<div id='safeAjax'></div>
 }}}
 
 Then include safeAjax and identify the connector
 
 {{{
-	<script type="text/javascript"      src="./lib/safeAjax/jquery.safeAjax_v2.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('#safeAjax').safeAjax({ ajaxConnector: "./lib/safeAjax/dbConnector.php" });
-	});
-	</script>
+<script type='text/javascript'      src='./lib/safeAjax/jquery.safeAjax_v2.js'></script>
+<script type='text/javascript'>
+$(document).ready(function() {
+   $('#safeAjax').safeAjax({ ajaxConnector: './lib/safeAjax/dbConnector.php' });
+});
+</script>
 }}}
 
+Use the connector at will to request info and actions from the backend, should your backend decide a resource/action needs protection then safeAjax will enforce it automatically
+
+The LightBox plugin will be used to present a login dialog which will not go away until the backend accepts the given username and password combination and cookies the user's browser (the cookie does not contain any info that can be used to authorize any other browser or session and has a configurable expiry date.)
+
+Once the user succeeds then the request will be re-submitted and approved using the previously deposited cookie.  The request/response that causes the login to be required is discarded and automatically re-submitted by safeAjax to streamline the process of approving requests as well as improving the overall security.
+
+{{{
+
+// for our purposes, the backend allows this
+$('#safeAjax').safeDBMS({ load: 'address', id: addrId },function(data){ 
+   $('#addr').val(data.addr);    $('#city').val(data.city);
+   $('#state').val(data.state);  $('#zip').val(data.zip);
+});
+
+// for our purposes, the backend restricts this
+$('#saveBtn').click(function(){
+   dataItems = { save: 'address', id: addrId };
+   dataItems.addr = $('#addr').val();    dataItems.city = $('#city').val();
+   dataItems.state = $('#state').val();  dataItems.zip =$('#zip').val();
+   $('#safeAjax').safeDBMS(dataItems,function(result){ 
+      $('#savedStatus').html('['+(result.safeAjax)?'saved ok':'save failed'+']');
+   });
+});
+
+}}}
 
 
 === Changelog ===
