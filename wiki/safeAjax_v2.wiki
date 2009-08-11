@@ -1,19 +1,13 @@
 #labels ajoslin,ajax,security,jquery,plugin,php,password,session,cookie
-=== Summary ===
-
 General information about the safeAjax plugin by Allen Joslin
 
-=== Introduction ===
+=== In Summary ===
 
-I wrote this plugin to password protect web pages/sites and also to safeguard my ajax communications and sql access.
+Ajax is a thing of beauty, combining Ajax and jQuery creates elegance -- elegance with a need for quality protection, protection that is offered via safeAjax.
 
-It's originally based upon chris shifletts article: the truth about sessions
+I wrote this plugin to password protect web pages/sites and also to safeguard my backend resources and actions. It's originally based upon Chris Shifletts article: the truth about sessions, and uses the cross-platform JSON notation for communications between the javascript and the server-side code.  
 
-This plugin requires a server-based connector which does the testing of the connection as well as the password and access level validation prior to executing any sql statements.
-
-This version 2 has been reorganized from version one and includes a new drop-in methodology for easily extending the server-side codebase
-
-=== Usage === 
+=== Web-side Usage === 
 
 At this time there are several plugins that safeAjax depends upon, the next version will load them automatically -- for now you have to include them yourself 
 
@@ -68,6 +62,29 @@ $('#saveBtn').click(function(){
 });
 
 }}}
+
+=== Server-side Usage ===
+
+This plugin requires a server-based connector (provided as part of this package, implemented in PHP) which manages the connections to and interactions with the database. This connector is where you will select the level of protection desired from a set of two options: Simple and Advanced.  
+
+The two levels of protection are provided in a class hierarchy instatiate whichever one you want and the usage is identical -- Low security: single username/password verification for all resources (no database table of usernames and passwords required.)  Or High security: database based multipleUser+accessLevel configuration which allows for different logins to have different powers (the create statment is commented into the code so that you can generate the required table yourself).
+
+I have a set of helper functions I use to access/manipulate data in ways that are protected against sql-injection attacks, feel free to use them however you wish.
+
+*A word on parameters, I use a single JSON object to handle everything.  period.  full-stop.*
+
+I long ago settled on using properties lists (maps/hashes/associativeArrays) to encapsulate all parameters sent to and received from routines.  While a little bit of predictability and perhaps some type-safety was lost the overall increase in ease-of-use far outweighed the required increase in stack memory.  When it came time to implement safeAjax there was no second thought -- I think you will enjoy it as much as I do.
+
+On the request side I merge the _GET and _POST parameter arrays into one $params [associative] array so that you don't have to care how the values were sent.
+
+For the return I provide a variable $json into which everything to be returned is to be put.  The authorization routines will fill the safeAjax and safeAjaxRequires values and you should load up the rest with your outputs.  The [provided] connector will encode the $json variable at the completion of the request and the web-side plugin will parse it back into a variable ready for your usage.
+
+*A word on code organization, segregate and compartmentalize wherever possible !!*
+
+This plugin was written to support a new drop-in methodology for easily extending the server-side codebase using a predefined interface which your classes must implement.  You then populate a particular directory with your class files and every request/response that goes thru the connector is given to each class to see if they want to do something with the request.   
+
+This support for drop-in classes allows one to easily group sets of routines related to particular actions or entities.  It's far easier to compartmentalize your code and limit the ripples of change and testing when you can segment your codebase in this way.  Even though all code is instatiated for each request and response whether it will be used or not I believe the tradeoff to code stability and maintainablity to be completely worth the cost of a few more milliseconds per request/response cycle.
+
 
 
 === Changelog ===
