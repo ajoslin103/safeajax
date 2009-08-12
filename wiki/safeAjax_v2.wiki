@@ -71,7 +71,7 @@ $('#saveBtn').click(function(){
 
 This plugin requires a server-based connector (provided as part of this package, implemented in PHP) which manages the connections to and interactions with the database. This connector is where you will select the level of protection desired from a set of two options: Simple and Advanced.  
 
-The two levels of protection are provided in a class hierarchy instatiate whichever one you want and the usage is identical -- Low security: single username/password verification for all resources (no database table of usernames and passwords required.)  Or High security: database based multipleUser+accessLevel configuration which allows for different logins to have different powers (the create statment is commented into the code so that you can generate the required table yourself).
+The two levels of protection are provided in a class hierarchy instatiate whichever one you want and the usage is identical -- Low security: single username/password verification for all resources (no database table of usernames and passwords required.)  Or High security: database based multipleUser+accessLevel configuration which allows for different logins to have different powers (a sql create statement is commented into the code so that you can generate the required table yourself).
 
 I have a set of helper functions I use to access/manipulate data in ways that are protected against sql-injection attacks, feel free to use them however you wish.
 
