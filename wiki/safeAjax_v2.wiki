@@ -3,7 +3,7 @@ General information about the safeAjax plugin by Allen Joslin
 
 === In Summary ===
 
-Ajax is a thing of beauty, combining Ajax and jQuery creates elegance -- and insideous elegance resulting in a need for truly seamless protection, protection that is offered via safeAjax.
+Ajax is a thing of beauty, combining Ajax and jQuery creates elegance -- an insideous elegance resulting in a need for truly seamless protection, protection that is offered via safeAjax.
 
 I wrote this plugin to password protect my own web pages/sites and also to safeguard my backend resources and actions. It's originally based upon Chris Shifletts article: the truth about sessions, and uses the cross-platform JSON notation for communications between the javascript and the server-side code.  I now offer it up to you, Enjoy !!
 
