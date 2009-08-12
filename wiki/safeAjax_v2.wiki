@@ -122,8 +122,6 @@ class Addresses implements safeAjax_DBMS {
                      }
                   }
                }
-               
-            // retrieve the address record here
             }
          }
       }
