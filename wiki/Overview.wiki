@@ -89,13 +89,13 @@ The current implementation looks for the drop-ins folder as a sibling to the fol
 
 There are prefix and suffix files (safeAjax_requestStart.php & safeAjax_requestStop.php) provided and loaded before and after each request-response cycle -- in these you can put some amount of code that MUST be execute before/after the cycle.
 
-Here's a sample server side class file to handle the address load and save functions we referenced above:
+Here's a sample server side class file:  
 
 {{{
 
 <?php
 
-require_once("../safeAjax-SiteCode/safeAjax_SiteCode.interface.php"); // cwd is ./safeAjax/
+require_once(dirname(__FILE__)."/safeAjax_SiteCode.interface.php"); 
 
 // This drop-in is not using databases - anything over accessLevel = 1 needs a login/cookie
 
