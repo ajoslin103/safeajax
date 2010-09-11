@@ -1,5 +1,5 @@
 #labels safeAjax,ajoslin,library,defaults,options,startup
-Options and Defaults for SafeAjax v4.x
+!SafeAjax -- Options and Defaults
 
 {{{
 
