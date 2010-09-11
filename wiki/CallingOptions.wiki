@@ -10,6 +10,6 @@
     function asyncRequest ( requestObj, callbackPass, callbackFail ); 
 
     /*********** make a [blocking] call for login/cookie to the backend ***********/
-    function syncLogin ( username, password );
+    function syncLogin ( username, password ); // will sha1 according to settings
 
 }}}
