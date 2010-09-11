@@ -17,7 +17,7 @@ At this time there are several plugins that safeAjax depends upon, they are incl
 
 Step 1.
 
-Include safeAjax and identify the connector when your page loads
+Include safeAjax and identify the connector when your page loads -- OptionsAndDefaults
 
 {{{
 <script type='text/javascript'      src='./lib/safeAjax/jquery.safeAjax_v4.js'></script>
