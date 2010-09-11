@@ -1,0 +1,11 @@
+SafeAjax -- Calling Options
+
+{{{
+
+    /*********** push a call to the backend with full blocking ***********/
+    this.syncRequest = function(requestObj); 
+    
+    // ********** push a call to the backend without blocking ***********
+    this.asyncRequest = function(requestObj,callbackPass,callbackFail); 
+
+}}}
