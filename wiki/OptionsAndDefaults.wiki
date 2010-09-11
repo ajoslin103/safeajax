@@ -15,7 +15,7 @@ defaults = {
 	,loginFirst: false                                   // safeAjax option to login on page load
 	,handleLogin: false                                  // safeAjax option to use it's internal login dialog
 	,loginReady: false                                   // state of login codebase
-	,loginMissing: false			                          // state of login codebase
+	,loginMissing: false                                 // state of login codebase
 	,unFieldName: "sa_UName"                             // login option
 	,pwFieldName: "sa_PWord"                             // login option
 	,sha1Logins: true                                    // login option, will sha1 prior to request
