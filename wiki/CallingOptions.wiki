@@ -4,9 +4,12 @@
 {{{
 
     /*********** push a call to the backend with full blocking ***********/
-    this.syncRequest = function(requestObj); 
+    function syncRequest ( requestObj ); 
     
-    // ********** push a call to the backend without blocking ***********
-    this.asyncRequest = function(requestObj,callbackPass,callbackFail); 
+    /********** push a call to the backend without blocking ***********/
+    function asyncRequest ( requestObj, callbackPass, callbackFail ); 
+
+    /*********** make a [blocking] call for login/cookie to the backend ***********/
+    function syncLogin ( username, password );
 
 }}}
