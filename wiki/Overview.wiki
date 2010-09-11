@@ -43,7 +43,7 @@ Once the user succeeds then the request is re-submitted and approved using the j
 
 The safeAjax-bottlenecked request/response that caused the login to be required is discarded and a copy is automatically re-submitted by safeAjax to streamline the process of approving requests as well as [slightly] improving the overall security -- your code will not know this has happened.
 
-* jQuery samples * 
+* javascript (jQuery) calling samples *  CallingOptions
 
 {{{
 
@@ -58,7 +58,7 @@ $('#saveBtn').click(function(){
    dataItems = { save: 'address', id: addrId };
    dataItems.addr = $('#addr').val();    dataItems.city = $('#city').val();
    dataItems.state = $('#state').val();  dataItems.zip =$('#zip').val();
-   $('#safeAjax').asyncRequest(dataItems,function(result){ 
+   $('#safeAjax').syncRequest(dataItems,function(result){ 
       $('#savedStatus').html('['+(result. authOK)?'saved ok':'save failed'+']');
    });
 });
