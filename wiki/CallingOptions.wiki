@@ -9,7 +9,12 @@
     /********** push a call to the backend without blocking ***********/
     function asyncRequest ( requestObj, callbackPass, callbackFail ); 
 
-    /*********** make a [blocking] call for login/cookie to the backend ***********/
-    function syncLogin ( username, password ); // will sha1(values) according to settings
+
+
+    /*********** make a [blocking] call for logout to the backend ***********/
+    function syncLogout (  );
+
+    /*********** make a [blocking] call for login to the backend ***********/
+    function syncLogin ( username, password ); // calls logout() 
 
 }}}
