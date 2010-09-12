@@ -20,7 +20,7 @@ defaults = {
 	,pwFieldName: "sa_PWord"                             // login option
 	,sha1Logins: true                                    // login option, will sha1 prior to request
 	,json_js: "./lib/safeAjax/js/json2.js"               // working resource
-	,cookie_js: "./lib/safeAjax/js/jquery.cookie.js"      //    working resource
+	,cookie_js: "./lib/safeAjax/js/jquery.cookie.js"     // working resource
 	,sha1_js: "./lib/safeAjax/js/jquery.sha1.js"         // login resource
 	,jqModal_js: "./lib/safeAjax/js/jqModal.js"          // login resource
 	,jqModal_css: "./lib/safeAjax/js/jqModal.css"        // login resource
